@@ -65,9 +65,9 @@ class Cart:
         Если remove_count больше, чем количество продуктов в позиции, то удаляется вся позиция
         """
         if self.products.get(product) is None:
-            raise 'Удаляемые товары не найдены в корзине'
+            raise ValueError
         else:
-            if remove_count > self.products[product] or remove_count is None:
+            if remove_count is None or remove_count >= self.products[product]:
                 del self.products[product]
             else:
                 self.products[product] -= remove_count
@@ -96,4 +96,4 @@ class Cart:
                 continue
             else:
                 raise ValueError
-        self.products = {}
+        self.clear()
